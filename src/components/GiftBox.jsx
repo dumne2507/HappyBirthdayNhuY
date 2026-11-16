@@ -8,7 +8,9 @@ const SPARKLE_EMOJIS = ['✨', '⭐', '🌟', '💖', '🎀', '💫', '🌸', '�
 export default function GiftBox() {
   const [isOpen, setIsOpen] = useState(false);
   const [showSparkles, setShowSparkles] = useState(false);
+  const [media, setMedia] = useState(config.giftMedia || null);
   const sparkleTimerRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const openBox = useCallback(() => {
     if (isOpen) return;
@@ -45,9 +47,31 @@ export default function GiftBox() {
     clearTimeout(sparkleTimerRef.current);
   }, []);
 
+  const handleMediaUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const isVideo = file.type.startsWith('video');
+      const url = URL.createObjectURL(file);
+      setMedia({
+        type: isVideo ? 'video' : 'image',
+        src: url,
+        caption: config.giftMedia?.caption || 'Món quà đặc biệt dành riêng cho bạn! 💖',
+      });
+    }
+  };
+
   return (
     <section className="gift-section section">
       <h2 className="section-title">Hộp Quà Bất Ngờ 🎁</h2>
+
+      {/* Hidden file input for uploading photo or video */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*,video/*"
+        style={{ display: 'none' }}
+        onChange={handleMediaUpload}
+      />
 
       <div className="card gift-card">
         {/* Gift Box */}
@@ -105,13 +129,52 @@ export default function GiftBox() {
           Nhấn vào hộp quà để mở! 👆
         </p>
 
-        {/* Secret Message */}
+        {/* Secret Message & Surprise Media Card */}
         <div className={`gift-message-container ${isOpen ? 'visible' : ''}`}>
           <div className="gift-message-card">
             <span className="gift-message-corner">✦</span>
             <div className="gift-message-icon">🎁</div>
-            <div className="gift-message-label">Lời nhắn bí mật</div>
+            <div className="gift-message-label">Món quà & Lời nhắn bí mật</div>
+
+            {/* Surprise Media: Photo or Video if available */}
+            {media?.src ? (
+              <div className="gift-media-box">
+                {media.type === 'video' ? (
+                  <video
+                    src={media.src}
+                    controls
+                    autoPlay
+                    muted
+                    playsInline
+                    className="gift-media-element"
+                  />
+                ) : (
+                  <img
+                    src={media.src}
+                    alt="Món quà bất ngờ"
+                    className="gift-media-element"
+                  />
+                )}
+                {media.caption && (
+                  <p className="gift-media-caption">{media.caption}</p>
+                )}
+              </div>
+            ) : null}
+
+            {/* Secret Message Text */}
             <p className="gift-message-text">{config.giftSecretMessage}</p>
+
+            {/* Quick Upload Button (cho phép đổi ảnh/video trực tiếp) */}
+            <div className="gift-media-toolbar">
+              <button
+                className="gift-upload-mini-btn"
+                onClick={() => fileInputRef.current?.click()}
+                title="Thay ảnh hoặc video trong hộp quà"
+              >
+                {media?.src ? '📷 Đổi ảnh/video khác' : '📷 Thêm ảnh/video vào hộp quà'}
+              </button>
+            </div>
+
             <div className="gift-message-dots">
               <span className="gift-message-dot" />
               <span className="gift-message-dot" />

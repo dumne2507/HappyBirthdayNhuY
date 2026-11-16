@@ -646,3 +646,59 @@
     right: 14px;
   }
 }
+
+
+/* ---- Gift Media (Photo/Video) in Secret Box ---- */
+.gift-media-box {
+  margin: 16px 0 20px;
+  width: 100%;
+  max-width: 380px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.25);
+  border: 3px solid rgba(255, 214, 231, 0.9);
+  background: #FFF;
+  animation: scaleIn 0.5s ease both;
+}
+
+.gift-media-element {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  display: block;
+  border-radius: calc(var(--radius-md) - 3px);
+}
+
+.gift-media-caption {
+  font-family: var(--font-accent);
+  font-size: 0.9rem;
+  color: var(--deep-pink);
+  font-weight: 600;
+  padding: 10px 12px;
+  background: rgba(255, 246, 232, 0.85);
+  margin: 0;
+  border-top: 1px dashed var(--pastel-pink);
+}
+
+.gift-media-toolbar {
+  margin-top: 14px;
+}
+
+.gift-upload-mini-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px dashed var(--soft-purple);
+  color: var(--text-medium);
+  font-family: var(--font-accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gift-upload-mini-btn:hover {
+  background: var(--lavender);
+  color: var(--deep-pink);
+  transform: translateY(-1px);
+}

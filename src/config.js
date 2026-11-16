@@ -11,11 +11,11 @@ const config = {
   senderName: "Người bạn của bạn",
 
   // Ngày sinh nhật (format: DD/MM/YYYY)
-  birthday: "23/11/2005",
+  birthday: "23/11/2026",
 
   // Lời chúc trên trang chính
   mainWish:
-    "Chúc mừng sinh nhật cô gái đặc biệt hôm nay!",
+    "Chúc mừng sinh nhật Như ý 🥳🎂",
   
   mainMessage:
     "Thêm một tuổi mới, chúc bạn luôn xinh đẹp, vui vẻ, gặp thật nhiều điều may mắn và luôn giữ được năng lượng tích cực của mình nhé!",
@@ -32,6 +32,14 @@ Stay happy, stay awesome! 💗`,
   // Lời chúc bí mật trong hộp quà
   giftSecretMessage:
     "Bạn là người tuyệt vời nhất! Cảm ơn vì đã luôn là chính mình. 🌟",
+
+  // 🎁 Media bất ngờ trong hộp quà (Ảnh hoặc Video)
+  // Đặt src = null nếu chưa có file, hoặc điền đường dẫn ảnh/video
+  giftMedia: {
+    type: "image", // "image" | "video" | null
+    src: null,     // ví dụ: "/gift.jpg" hoặc link online hoặc null để upload trực tiếp
+    caption: "Món quà đặc biệt dành cho bạn! ✨",
+  },
 
   // Lời chúc khi thổi nến
   wishMessage:
