@@ -39,7 +39,7 @@
   position: relative;
   cursor: pointer;
   animation: floatSlow 5s ease-in-out infinite;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, margin-bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .envelope-scene:hover {
@@ -48,6 +48,7 @@
 
 .envelope-scene.is-open {
   animation: none;
+  margin-bottom: 280px;
 }
 
 /* -- Envelope body -- */
@@ -246,8 +247,8 @@
   top: 70px;
   left: 50%;
   transform: translateX(-50%);
-  width: 240px;
-  z-index: 3;
+  width: min(92vw, 420px);
+  z-index: 10;
   pointer-events: none;
   transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
               opacity 0.4s ease;
@@ -260,7 +261,7 @@
 }
 
 .letter-container.letter-visible {
-  transform: translateX(-50%) translateY(-160px);
+  transform: translateX(-50%) translateY(-150px);
   opacity: 1;
   pointer-events: auto;
 }
@@ -268,14 +269,24 @@
 .letter {
   background: linear-gradient(170deg, #fffdf7 0%, #fff8ee 50%, #fff5e6 100%);
   border-radius: var(--radius-md);
-  padding: 28px 22px;
+  padding: 30px 24px 20px;
   position: relative;
   box-shadow:
-    0 8px 32px rgba(199, 166, 255, 0.2),
-    0 2px 8px rgba(0, 0, 0, 0.05);
-  transform: rotate(-1.5deg);
-  border: 2px solid rgba(255, 214, 231, 0.6);
-  overflow: hidden;
+    0 16px 48px rgba(255, 107, 157, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: rotate(-1deg);
+  border: 2px solid rgba(255, 214, 231, 0.85);
+  max-height: 540px;
+  overflow-y: auto;
+}
+
+.letter::-webkit-scrollbar {
+  width: 5px;
+}
+
+.letter::-webkit-scrollbar-thumb {
+  background: var(--pastel-pink);
+  border-radius: 10px;
 }
 
 /* Decorative corner hearts */
@@ -518,8 +529,12 @@
     font-size: 1rem;
   }
 
+  .envelope-scene.is-open {
+    margin-bottom: 300px;
+  }
+
   .letter-container {
-    width: 210px;
+    width: min(92vw, 360px);
   }
 
   .letter-container.letter-visible {
@@ -531,12 +546,12 @@
   }
 
   .letter-greeting {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .letter-text {
-    font-size: 0.82rem;
-    line-height: 1.65;
+    font-size: 0.88rem;
+    line-height: 1.7;
   }
 }
 
@@ -544,6 +559,10 @@
   .envelope-scene {
     width: 210px;
     height: 160px;
+  }
+
+  .envelope-scene.is-open {
+    margin-bottom: 310px;
   }
 
   .envelope-body {
@@ -574,7 +593,7 @@
   }
 
   .letter-container {
-    width: 185px;
+    width: min(94vw, 310px);
   }
 
   .letter-container.letter-visible {

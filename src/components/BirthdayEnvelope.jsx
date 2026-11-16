@@ -11,6 +11,13 @@ export default function BirthdayEnvelope() {
     setIsOpen(true);
     // Delay letter slide-up until flap is partially open
     setTimeout(() => setLetterVisible(true), 350);
+    // Tự động cuộn nhẹ nhàng để đọc trọn vẹn lá thư
+    setTimeout(() => {
+      document.querySelector('.letter-container')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }, 450);
   }, [isOpen]);
 
   const handleClose = useCallback(() => {
@@ -18,11 +25,6 @@ export default function BirthdayEnvelope() {
     // Wait for letter to slide back in before closing flap
     setTimeout(() => setIsOpen(false), 500);
   }, []);
-
-  // Split letter content into greeting (first line) and body
-  const lines = (config.letterContent || '').split('\n');
-  const greeting = lines[0] || 'Happy Birthday!';
-  const bodyText = lines.slice(1).join('\n').trim();
 
   // Decorative side border hearts
   const borderSymbols = ['♡', '✿', '♡', '✿', '♡', '✿', '♡'];
@@ -32,7 +34,7 @@ export default function BirthdayEnvelope() {
       <h2 className="section-title">Thư Tay Dành Cho Bạn 💌</h2>
       <p className="envelope-subtitle">Nhấn vào phong bì để mở thư nhé!</p>
 
-      <div className="card envelope-card">
+      <div className={`card envelope-card ${isOpen ? 'envelope-open' : ''}`}>
         {/* Decorative floating emojis */}
         <span className="envelope-deco">💕</span>
         <span className="envelope-deco">✨</span>
@@ -84,11 +86,8 @@ export default function BirthdayEnvelope() {
 
               {/* Letter text */}
               <div className="letter-content">
-                <div className="letter-greeting">{greeting}</div>
-                <div className="letter-text">{bodyText}</div>
-                <div className="letter-signature">
-                  — {config.senderName} 💗
-                </div>
+                <div className="letter-greeting">Gửi Như Ý 💌</div>
+                <div className="letter-text">{config.letterContent}</div>
               </div>
 
               {/* Close button */}
