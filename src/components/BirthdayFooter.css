@@ -50,6 +50,22 @@
   font-size: 1rem;
   color: var(--text-medium);
   margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.footer-meme-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  animation: bounce 2s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .footer-sender {

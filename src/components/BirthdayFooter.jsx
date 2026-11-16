@@ -20,7 +20,8 @@ const BirthdayFooter = () => {
       </div>
 
       <p className="footer-message">
-        Made with 💗 by <span className="footer-sender">{config.senderName}</span>
+        made with <span className="footer-sender">claude gemini antigravity</span> not bun hehee
+        <img src="./media/meme.png" alt="hehee" className="footer-meme-icon" />
       </p>
       
       <p className="footer-wish">
