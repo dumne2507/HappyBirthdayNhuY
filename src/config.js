@@ -8,7 +8,7 @@ const config = {
   recipientName: "Như Ý",
 
   // Tên người gửi
-  senderName: "Người bạn của bạn",
+  senderName: "bun",
 
   // Ngày sinh nhật (format: DD/MM/YYYY)
   birthday: "23/11/2026",
@@ -21,13 +21,11 @@ const config = {
     "Thêm một tuổi mới, chúc bạn luôn xinh đẹp, vui vẻ, gặp thật nhiều điều may mắn và luôn giữ được năng lượng tích cực của mình nhé!",
 
   // Nội dung thư trong phong bì
-  letterContent: `Happy Birthday!
+  letterContent: `hmm...sao nhỉ hy vọng là bà sẽ thích web này do tui thiết kế ra làm có hơi gấp hy vọng là bà vẫn thích nó nhóe, cũng là lần đầu bun viết tâm thư … nên đôi chút có hơi ngọng nhé “đừng cười =)))” . Tuổi mới chúc Ý tự tin hơn vào bản thân mình, cười nhiều hơn ovtk nhóe, à còn nữa đặc biệt dù là đối thủ nhưng mà tui vẫn chúc bà bỏ nhỏ trái nào qua lưới trái đó =)))) 
 
-Chúc bạn tuổi mới thật nhiều niềm vui, luôn tự tin, xinh đẹp và đạt được những điều mà bạn mong muốn.
+Mong rằng những ngày sắp tới sẽ luôn có nhiều điều tốt đẹp đến với Như ý nè hehee
 
-Mong rằng những ngày sắp tới sẽ luôn có thật nhiều điều tốt đẹp đến với bạn.
-
-Stay happy, stay awesome! 💗`,
+Stay happy , Stay awesome!!`,
 
   // Lời chúc bí mật trong hộp quà
   giftSecretMessage:
