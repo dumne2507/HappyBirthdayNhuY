@@ -62,8 +62,8 @@ Stay happy, stay awesome! 💗`,
   memories: [
     {
       id: 1,
-      src: "./media/NhuY.jpg",
-      caption: "Cô gái xinh đẹp Như Ý 🌸",
+      src: null, // null = placeholder
+      caption: "Khoảnh khắc đáng nhớ 📸",
     },
     {
       id: 2,
