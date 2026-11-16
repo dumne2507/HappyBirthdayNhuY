@@ -5,7 +5,7 @@
 
 const config = {
   // Tên người nhận
-  recipientName: "Bạn",
+  recipientName: "Như Ý",
 
   // Tên người gửi
   senderName: "Người bạn của bạn",
@@ -33,12 +33,11 @@ Stay happy, stay awesome! 💗`,
   giftSecretMessage:
     "Bạn là người tuyệt vời nhất! Cảm ơn vì đã luôn là chính mình. 🌟",
 
-  // 🎁 Media bất ngờ trong hộp quà (Ảnh hoặc Video)
-  // Đặt src = null nếu chưa có file, hoặc điền đường dẫn ảnh/video
+  // 🎁 Media bất ngờ trong hộp quà (Ảnh & Video của Như Ý)
   giftMedia: {
-    type: "image", // "image" | "video" | null
-    src: null,     // ví dụ: "/gift.jpg" hoặc link online hoặc null để upload trực tiếp
-    caption: "Món quà đặc biệt dành cho bạn! ✨",
+    video: "./media/NhuYne.mp4",
+    image: "./media/NhuY.jpg",
+    caption: "Món quà đặc biệt dành riêng cho Như Ý! 💖✨",
   },
 
   // Lời chúc khi thổi nến
@@ -63,8 +62,8 @@ Stay happy, stay awesome! 💗`,
   memories: [
     {
       id: 1,
-      src: null, // null = placeholder
-      caption: "Khoảnh khắc đáng nhớ 📸",
+      src: "./media/NhuY.jpg",
+      caption: "Cô gái xinh đẹp Như Ý 🌸",
     },
     {
       id: 2,
