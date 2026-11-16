@@ -48,32 +48,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 20px;
-  max-width: 600px;
+  padding: 24px 20px;
+  max-width: 640px;
   width: 100%;
 }
 
 /* --- Heading --- */
 .intro__title {
   font-family: var(--font-display);
-  font-size: 3.2rem;
+  font-size: clamp(2.2rem, 5.5vw, 3.2rem);
   font-weight: 700;
   color: var(--deep-pink);
   text-shadow: 0 2px 15px rgba(255, 107, 157, 0.3);
   animation: bounce 2s ease-in-out infinite;
   text-align: center;
-  line-height: 1.2;
-  margin-bottom: 4px;
+  line-height: 1.25;
+  margin-bottom: 12px;
 }
 
 /* --- Subtext --- */
 .intro__subtext {
   font-family: var(--font-accent);
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 2.8vw, 1.35rem);
   color: var(--text-medium);
   animation: fadeIn 1.5s ease 0.5s both;
   text-align: center;
+  margin-bottom: 50px; /* Tạo khoảng trống an toàn tuyệt đối cho chiếc nơ hộp quà */
 }
 
 /* ============================================
@@ -81,7 +81,7 @@
    ============================================ */
 .intro__gift-area {
   position: relative;
-  margin: 28px 0 24px;
+  margin: 20px 0 36px;
   animation: float 3s ease-in-out infinite;
 }
 
@@ -490,8 +490,12 @@
     padding: 14px 28px;
   }
 
+  .intro__subtext {
+    margin-bottom: 36px;
+  }
+
   .intro__gift-area {
-    margin: 20px 0 18px;
+    margin: 16px 0 24px;
   }
 
   .intro__emoji-burst span {
