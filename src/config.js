@@ -36,8 +36,8 @@ Stay happy, stay awesome! 💗`,
   // 🎁 Media bất ngờ trong hộp quà (2 bức ảnh của Như Ý)
   giftMedia: {
     images: [
-      "./media/NhuY.jpg",
       "./media/NhuYne.jpg",
+      "./media/NhuY.jpg",
     ],
     caption: "Món quà đặc biệt dành riêng cho Như Ý! 💖✨",
   },
@@ -64,32 +64,32 @@ Stay happy, stay awesome! 💗`,
   memories: [
     {
       id: 1,
-      src: null, // null = placeholder
+      src: "./media/album/anh1/anh1.jpg",
       caption: "Khoảnh khắc đáng nhớ 📸",
     },
     {
       id: 2,
-      src: null,
+      src: "./media/album/anh2/anh2.jpg",
       caption: "Cùng nhau vui vẻ 🎉",
     },
     {
       id: 3,
-      src: null,
+      src: "./media/album/anh3/anh3.jpg",
       caption: "Những ngày tháng đẹp 🌸",
     },
     {
       id: 4,
-      src: null,
+      src: "./media/album/anh4/anh4.jpg",
       caption: "Best memories ever 💕",
     },
     {
       id: 5,
-      src: null,
+      src: "./media/album/anh5/anh5.jpg",
       caption: "Friends forever 👯‍♀️",
     },
     {
       id: 6,
-      src: null,
+      src: "./media/album/anh6/anh6.jpg",
       caption: "Yêu thương mãi 💗",
     },
   ],
