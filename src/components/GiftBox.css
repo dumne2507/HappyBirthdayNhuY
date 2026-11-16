@@ -311,11 +311,11 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  transition: max-height 0.8s ease-in-out, opacity 0.5s ease;
 }
 
 .gift-message-container.visible {
-  max-height: 400px;
+  max-height: 2500px;
   opacity: 1;
 }
 
@@ -650,23 +650,25 @@
 
 /* ---- Gift Media (Photo/Video) in Secret Box ---- */
 .gift-media-box {
-  margin: 16px 0 20px;
+  margin: 16px auto 20px;
   width: 100%;
-  max-width: 380px;
+  max-width: 520px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.25);
+  box-shadow: 0 8px 30px rgba(255, 107, 157, 0.25);
   border: 3px solid rgba(255, 214, 231, 0.9);
-  background: #FFF;
+  background: #FFF6E8;
   animation: scaleIn 0.5s ease both;
 }
 
 .gift-media-element {
   width: 100%;
-  max-height: 280px;
-  object-fit: cover;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
   display: block;
   border-radius: calc(var(--radius-md) - 3px);
+  background: #FFF6E8;
 }
 
 .gift-media-caption {

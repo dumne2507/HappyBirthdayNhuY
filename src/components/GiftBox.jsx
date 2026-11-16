@@ -18,6 +18,14 @@ export default function GiftBox() {
     setIsOpen(true);
     setShowSparkles(true);
 
+    // Cuộn mượt để hiển thị toàn bộ nội dung không bị che
+    setTimeout(() => {
+      document.querySelector('.gift-message-container')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }, 350);
+
     // Fire confetti
     confetti({
       particleCount: 80,
