@@ -8,7 +8,6 @@ const SPARKLE_EMOJIS = ['✨', '⭐', '🌟', '💖', '🎀', '💫', '🌸', '�
 export default function GiftBox() {
   const [isOpen, setIsOpen] = useState(false);
   const [showSparkles, setShowSparkles] = useState(false);
-  const [activeTab, setActiveTab] = useState('video'); // 'video' | 'image'
   const [media, setMedia] = useState(config.giftMedia || null);
   const sparkleTimerRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -18,7 +17,7 @@ export default function GiftBox() {
     setIsOpen(true);
     setShowSparkles(true);
 
-    // Cuộn mượt để hiển thị toàn bộ nội dung không bị che
+    // Cuộn mượt để hiển thị trọn vẹn 2 bức ảnh
     setTimeout(() => {
       document.querySelector('.gift-message-container')?.scrollIntoView({
         behavior: 'smooth',
@@ -57,30 +56,28 @@ export default function GiftBox() {
   }, []);
 
   const handleMediaUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const isVideo = file.type.startsWith('video');
-      const url = URL.createObjectURL(file);
+    const files = Array.from(e.target.files || []);
+    if (files.length > 0) {
+      const urls = files.map((f) => URL.createObjectURL(f));
       setMedia((prev) => ({
         ...prev,
-        [isVideo ? 'video' : 'image']: url,
+        images: urls,
       }));
-      setActiveTab(isVideo ? 'video' : 'image');
     }
   };
 
-  const hasVideo = Boolean(media?.video);
-  const hasImage = Boolean(media?.image);
+  const images = media?.images || (media?.image ? [media.image] : []);
 
   return (
     <section className="gift-section section">
       <h2 className="section-title">Hộp Quà Bất Ngờ 🎁</h2>
 
-      {/* Hidden file input for uploading photo or video */}
+      {/* Hidden file input for uploading photo */}
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/*,video/*"
+        multiple
+        accept="image/*"
         style={{ display: 'none' }}
         onChange={handleMediaUpload}
       />
@@ -148,46 +145,23 @@ export default function GiftBox() {
             <div className="gift-message-icon">🎁</div>
             <div className="gift-message-label">Món quà & Lời nhắn bí mật</div>
 
-            {/* Media Tabs if both video and image exist */}
-            {hasVideo && hasImage && (
-              <div className="gift-media-tabs">
-                <button
-                  className={`gift-media-tab ${activeTab === 'video' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('video')}
-                >
-                  🎬 Video kỷ niệm
-                </button>
-                <button
-                  className={`gift-media-tab ${activeTab === 'image' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('image')}
-                >
-                  📸 Ảnh của Như Ý
-                </button>
+            {/* Hiển thị 2 bức ảnh cùng xuất hiện cực đẹp */}
+            {images.length > 0 && (
+              <div className="gift-photos-grid">
+                {images.map((src, index) => (
+                  <div key={index} className="gift-photo-item">
+                    <img
+                      src={src}
+                      alt={`Ảnh kỷ niệm ${index + 1}`}
+                      className="gift-photo-img"
+                    />
+                  </div>
+                ))}
               </div>
             )}
 
-            {/* Media Box Display */}
-            {(hasVideo || hasImage) && (
-              <div className="gift-media-box">
-                {activeTab === 'video' && hasVideo ? (
-                  <video
-                    src={media.video}
-                    controls
-                    autoPlay
-                    playsInline
-                    className="gift-media-element"
-                  />
-                ) : (
-                  <img
-                    src={media.image}
-                    alt="Món quà bất ngờ"
-                    className="gift-media-element"
-                  />
-                )}
-                {media.caption && (
-                  <p className="gift-media-caption">{media.caption}</p>
-                )}
-              </div>
+            {media?.caption && (
+              <p className="gift-media-caption">{media.caption}</p>
             )}
 
             {/* Secret Message Text */}
@@ -198,9 +172,9 @@ export default function GiftBox() {
               <button
                 className="gift-upload-mini-btn"
                 onClick={() => fileInputRef.current?.click()}
-                title="Thay hoặc thêm ảnh/video khác"
+                title="Thay hoặc thêm ảnh khác"
               >
-                📷 Thêm / Đổi ảnh & video khác
+                📷 Đổi ảnh khác
               </button>
             </div>
 

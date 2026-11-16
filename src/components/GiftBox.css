@@ -738,3 +738,66 @@
   border-color: transparent;
   box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
 }
+
+
+/* ---- Dual Photo Layout in Secret Box ---- */
+.gift-photos-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 16px auto 14px;
+  width: 100%;
+  max-width: 580px;
+}
+
+.gift-photo-item {
+  flex: 1 1 200px;
+  max-width: 260px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.22);
+  border: 3px solid rgba(255, 214, 231, 0.95);
+  background: #FFF;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  animation: scaleIn 0.5s ease both;
+}
+
+.gift-photo-item:nth-child(1) {
+  transform: rotate(-1.5deg);
+}
+
+.gift-photo-item:nth-child(2) {
+  transform: rotate(1.5deg);
+}
+
+.gift-photo-item:hover {
+  transform: rotate(0deg) scale(1.03) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(255, 107, 157, 0.35);
+  z-index: 2;
+}
+
+.gift-photo-img {
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  display: block;
+  background: #FFF6E8;
+}
+
+@media (max-width: 540px) {
+  .gift-photos-grid {
+    gap: 12px;
+  }
+
+  .gift-photo-item {
+    flex: 1 1 140px;
+    max-width: 100%;
+  }
+
+  .gift-photo-img {
+    max-height: 280px;
+  }
+}

@@ -33,10 +33,12 @@ Stay happy, stay awesome! 💗`,
   giftSecretMessage:
     "Bạn là người tuyệt vời nhất! Cảm ơn vì đã luôn là chính mình. 🌟",
 
-  // 🎁 Media bất ngờ trong hộp quà (Ảnh & Video của Như Ý)
+  // 🎁 Media bất ngờ trong hộp quà (2 bức ảnh của Như Ý)
   giftMedia: {
-    video: "./media/NhuYne.mp4",
-    image: "./media/NhuY.jpg",
+    images: [
+      "./media/NhuY.jpg",
+      "./media/NhuYne.jpg",
+    ],
     caption: "Món quà đặc biệt dành riêng cho Như Ý! 💖✨",
   },
 
