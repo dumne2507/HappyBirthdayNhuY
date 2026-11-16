@@ -11,7 +11,7 @@ const config = {
   senderName: "Người bạn của bạn",
 
   // Ngày sinh nhật (format: DD/MM/YYYY)
-  birthday: "16/11/2026",
+  birthday: "23/11/2005",
 
   // Lời chúc trên trang chính
   mainWish:
@@ -44,7 +44,7 @@ Stay happy, stay awesome! 💗`,
     "Hạnh phúc nhé! 🌸",
     "Thành công nha! ⭐",
     "Mãi yêu đời! 🦋",
-    "Healthy & Happy! 🍀",
+    "Bớt Hụt Cầu nhóe 😏",
   ],
 
   // Lời chúc bí mật khi hoàn thành mini game

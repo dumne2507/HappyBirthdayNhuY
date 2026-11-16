@@ -18,7 +18,7 @@ export default function FloatingBalloons() {
     'Hạnh phúc nhé! 🌸',
     'Thành công nha! ⭐',
     'Mãi yêu đời! 🦋',
-    'Healthy & Happy! 🍀',
+    'Bớt Hụt Cầu nhóe 😏',
   ];
 
   // Array of 6 balloons: { id, flown: bool, flying: bool }
