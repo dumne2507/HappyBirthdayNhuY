@@ -1,0 +1,331 @@
+/* ============================================
+   💗 HeartAnimation - Interactive Flying Hearts
+   ============================================ */
+
+/* --- Section wrapper --- */
+.heart-section {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heart-section .section-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  text-align: center;
+  color: var(--deep-pink);
+  margin-bottom: 24px;
+}
+
+/* --- Card container --- */
+.heart-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 28px 36px;
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+}
+
+/* --- Heart stage (contains main heart + sparkles + flying hearts) --- */
+.heart-stage {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Main CSS Heart --- */
+.heart-main {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  animation: heartbeat 1.3s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px rgba(255, 107, 157, 0.45))
+          drop-shadow(0 0 40px rgba(255, 107, 157, 0.2));
+  transition: filter 0.3s ease;
+  z-index: 2;
+}
+
+.heart-stage:hover .heart-main {
+  filter: drop-shadow(0 0 24px rgba(255, 107, 157, 0.6))
+          drop-shadow(0 0 50px rgba(255, 107, 157, 0.35));
+}
+
+.heart-stage:active .heart-main {
+  animation: heartbeatClick 0.3s ease-out;
+}
+
+/* Classic CSS heart technique using pseudo-elements */
+.heart-main::before,
+.heart-main::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 52px;
+  height: 80px;
+  border-radius: 52px 52px 0 0;
+  background: linear-gradient(180deg, #ff7baa 0%, var(--deep-pink) 60%, #e8537f 100%);
+}
+
+.heart-main::before {
+  left: 50px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart-main::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* Inner highlight on the heart */
+.heart-main__shine {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  width: 22px;
+  height: 18px;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.55), transparent);
+  border-radius: 50%;
+  transform: rotate(45deg);
+  z-index: 3;
+  pointer-events: none;
+}
+
+@keyframes heartbeatClick {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.25); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* --- Sparkles around the main heart --- */
+.heart-sparkle {
+  position: absolute;
+  font-size: 1.1rem;
+  pointer-events: none;
+  z-index: 1;
+  animation: sparkle var(--dur, 2.2s) ease-in-out var(--delay, 0s) infinite;
+}
+
+/* --- Click hint --- */
+.heart-hint {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-light);
+  text-align: center;
+  animation: pulse 2.5s ease-in-out infinite;
+  user-select: none;
+}
+
+/* ============================================
+   💕 Flying Hearts (burst on click)
+   ============================================ */
+.flying-hearts-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Small CSS heart shape */
+.flying-heart {
+  position: absolute;
+  width: var(--size, 18px);
+  height: var(--size, 18px);
+  opacity: 0;
+  animation: flyHeart var(--fly-duration, 1.6s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--fly-delay, 0s);
+}
+
+.flying-heart::before,
+.flying-heart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  border-radius: 50% 50% 0 0;
+  background: var(--heart-color, var(--deep-pink));
+}
+
+.flying-heart::before {
+  left: 50%;
+  width: 50%;
+  height: 80%;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.flying-heart::after {
+  left: 0;
+  width: 50%;
+  height: 80%;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* flyHeart uses custom properties --tx and --ty for random direction */
+@keyframes flyHeart {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(calc(var(--tx) * 0.2), calc(var(--ty) * 0.2)) scale(1.1) rotate(calc(var(--rot) * 0.3));
+  }
+  60% {
+    opacity: 0.8;
+    transform: translate(calc(var(--tx) * 0.65), calc(var(--ty) * 0.65)) scale(0.9) rotate(calc(var(--rot) * 0.7));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0.2) rotate(var(--rot));
+  }
+}
+
+/* --- Message that appears after clicking --- */
+.heart-message {
+  font-family: var(--font-accent);
+  font-size: 1.05rem;
+  color: var(--deep-pink);
+  text-align: center;
+  animation: heartMessageIn 0.8s ease-out both;
+  background: linear-gradient(135deg, var(--deep-pink), var(--soft-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+@keyframes heartMessageIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- Decorative background particles --- */
+.heart-bg-particle {
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0.12;
+  pointer-events: none;
+  animation: floatSlow var(--dur, 7s) ease-in-out var(--delay, 0s) infinite;
+}
+
+/* ============================================
+   📱 Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .heart-section {
+    padding: 24px 16px;
+  }
+
+  .heart-section .section-title {
+    font-size: 1.3rem;
+  }
+
+  .heart-card {
+    padding: 32px 20px 28px;
+    min-height: 280px;
+  }
+
+  .heart-stage {
+    width: 170px;
+    height: 170px;
+  }
+
+  .heart-main {
+    width: 80px;
+    height: 72px;
+  }
+
+  .heart-main::before,
+  .heart-main::after {
+    width: 42px;
+    height: 64px;
+    border-radius: 42px 42px 0 0;
+  }
+
+  .heart-main::before {
+    left: 40px;
+  }
+
+  .heart-main__shine {
+    top: 12px;
+    left: 18px;
+    width: 18px;
+    height: 14px;
+  }
+
+  .heart-sparkle {
+    font-size: 0.9rem;
+  }
+
+  .heart-hint {
+    font-size: 0.78rem;
+  }
+
+  .heart-message {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .heart-card {
+    padding: 24px 16px 22px;
+    min-height: 250px;
+  }
+
+  .heart-stage {
+    width: 150px;
+    height: 150px;
+  }
+
+  .heart-main {
+    width: 66px;
+    height: 60px;
+  }
+
+  .heart-main::before,
+  .heart-main::after {
+    width: 35px;
+    height: 54px;
+    border-radius: 35px 35px 0 0;
+  }
+
+  .heart-main::before {
+    left: 33px;
+  }
+
+  .heart-main__shine {
+    top: 10px;
+    left: 14px;
+    width: 14px;
+    height: 12px;
+  }
+
+  .heart-message {
+    font-size: 0.88rem;
+  }
+}

@@ -1,0 +1,306 @@
+/* ============================================
+   📸 Memory Gallery - Polaroid Scrapbook
+   ============================================ */
+
+.memory-gallery {
+  position: relative;
+}
+
+.memory-gallery .section-title {
+  animation: fadeInUp 0.8s ease both;
+}
+
+/* ---- Grid Layout ---- */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 28px;
+  padding: 12px 8px 8px;
+}
+
+/* ---- Polaroid Frame ---- */
+.polaroid {
+  position: relative;
+  background: var(--white);
+  padding: 12px 12px 52px;
+  border-radius: 4px;
+  box-shadow:
+    0 4px 12px rgba(90, 74, 106, 0.12),
+    0 1px 3px rgba(90, 74, 106, 0.08);
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease;
+  animation: fadeInUp 0.7s ease both;
+  will-change: transform;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.polaroid:nth-child(1) { animation-delay: 0.1s; }
+.polaroid:nth-child(2) { animation-delay: 0.2s; }
+.polaroid:nth-child(3) { animation-delay: 0.3s; }
+.polaroid:nth-child(4) { animation-delay: 0.4s; }
+.polaroid:nth-child(5) { animation-delay: 0.5s; }
+.polaroid:nth-child(6) { animation-delay: 0.6s; }
+
+/* Unique tilts for scrapbook feel */
+.polaroid:nth-child(1) { transform: rotate(-2.5deg); }
+.polaroid:nth-child(2) { transform: rotate(1.8deg); }
+.polaroid:nth-child(3) { transform: rotate(-1.2deg); }
+.polaroid:nth-child(4) { transform: rotate(2.8deg); }
+.polaroid:nth-child(5) { transform: rotate(-0.8deg); }
+.polaroid:nth-child(6) { transform: rotate(1.5deg); }
+
+/* Hover: straighten + lift */
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-6px) !important;
+  box-shadow:
+    0 16px 40px rgba(255, 107, 157, 0.22),
+    0 4px 10px rgba(90, 74, 106, 0.1);
+  z-index: 10;
+}
+
+.polaroid:active {
+  transform: rotate(0deg) scale(1.02) translateY(-2px) !important;
+}
+
+/* ---- Photo area ---- */
+.polaroid-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.polaroid-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: fadeIn 0.5s ease both;
+}
+
+/* ---- Placeholder ---- */
+.polaroid-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(
+    135deg,
+    var(--pastel-pink) 0%,
+    var(--lavender) 50%,
+    var(--baby-blue) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientBG 6s ease infinite;
+}
+
+.polaroid-placeholder .placeholder-camera {
+  font-size: 2.4rem;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.polaroid-placeholder .placeholder-text {
+  font-family: var(--font-accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-medium);
+  opacity: 0.85;
+  letter-spacing: 0.3px;
+}
+
+/* ---- Caption ---- */
+.polaroid-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-medium);
+  text-align: center;
+  line-height: 1.2;
+  overflow: hidden;
+}
+
+/* ---- Hidden file input ---- */
+.memory-file-input {
+  display: none;
+}
+
+/* ---- Decorative Tape ---- */
+.polaroid-tape {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Washi tape – top center */
+.tape-top {
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 60px;
+  height: 18px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 214, 231, 0.7),
+    rgba(230, 217, 255, 0.7)
+  );
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+/* Washi tape – top left diagonal */
+.tape-left {
+  top: -6px;
+  left: -4px;
+  width: 48px;
+  height: 16px;
+  background: linear-gradient(
+    90deg,
+    rgba(216, 240, 255, 0.75),
+    rgba(196, 166, 255, 0.55)
+  );
+  border-radius: 2px;
+  transform: rotate(-35deg);
+  opacity: 0.8;
+}
+
+/* Pin emoji */
+.tape-pin {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+
+/* ---- Decorative Stickers ---- */
+.polaroid-sticker {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1.1rem;
+  z-index: 5;
+  animation: floatSlow 5s ease-in-out infinite;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+.sticker-pos-1 {
+  top: -10px;
+  right: -8px;
+  animation-delay: 0.5s;
+}
+
+.sticker-pos-2 {
+  bottom: 48px;
+  left: -10px;
+  animation-delay: 1s;
+}
+
+.sticker-pos-3 {
+  top: -12px;
+  left: -6px;
+  animation-delay: 1.5s;
+}
+
+.sticker-pos-4 {
+  bottom: 46px;
+  right: -8px;
+  animation-delay: 0.8s;
+}
+
+/* ---- Scattered background doodles ---- */
+.memory-doodle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1.5rem;
+  opacity: 0.2;
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.memory-doodle-1 {
+  top: 8px;
+  right: -8px;
+  animation-delay: 0s;
+}
+
+.memory-doodle-2 {
+  bottom: 30px;
+  left: -6px;
+  animation-delay: 2s;
+}
+
+.memory-doodle-3 {
+  top: 50%;
+  right: 2px;
+  animation-delay: 4s;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .memory-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 18px;
+  }
+
+  .polaroid {
+    padding: 8px 8px 42px;
+  }
+
+  .polaroid-caption {
+    height: 36px;
+    font-size: 0.65rem;
+  }
+
+  .polaroid-placeholder .placeholder-camera {
+    font-size: 1.8rem;
+  }
+
+  .polaroid-placeholder .placeholder-text {
+    font-size: 0.68rem;
+  }
+
+  .polaroid-sticker {
+    font-size: 0.9rem;
+  }
+
+  .tape-top {
+    width: 48px;
+    height: 14px;
+  }
+
+  .tape-left {
+    width: 38px;
+    height: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .memory-grid {
+    gap: 20px 14px;
+  }
+
+  .polaroid {
+    padding: 6px 6px 38px;
+  }
+
+  .polaroid-caption {
+    height: 32px;
+    font-size: 0.6rem;
+  }
+}

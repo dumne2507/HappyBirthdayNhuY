@@ -1,0 +1,92 @@
+/* ---- Birthday Footer ---- */
+.birthday-footer {
+  text-align: center;
+  padding: 60px 20px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-decorations {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+
+.footer-deco {
+  animation: float 3s ease-in-out infinite;
+}
+
+.footer-deco:nth-child(2) { animation-delay: 0.5s; }
+.footer-deco:nth-child(3) { animation-delay: 1s; }
+.footer-deco:nth-child(4) { animation-delay: 1.5s; }
+.footer-deco:nth-child(5) { animation-delay: 2s; }
+
+.footer-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.footer-divider::before,
+.footer-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pastel-pink), transparent);
+}
+
+.divider-star {
+  margin: 0 16px;
+  font-size: 1.2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.footer-message {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-medium);
+  margin-bottom: 8px;
+}
+
+.footer-sender {
+  font-family: var(--font-display);
+  color: var(--deep-pink);
+  font-weight: 600;
+}
+
+.footer-wish {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+  margin-bottom: 8px;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.footer-year {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.footer-sparkles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.footer-sparkle {
+  position: absolute;
+  bottom: 10px;
+  font-size: 0.7rem;
+  color: var(--soft-purple);
+  opacity: 0;
+  animation: sparkle 3s ease-in-out infinite;
+}

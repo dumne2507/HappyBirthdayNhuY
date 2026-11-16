@@ -1,0 +1,642 @@
+/* ============================================
+   🎂 Birthday Cake Component Styles
+   ============================================ */
+
+/* -- Container -- */
+.cake-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  overflow: visible;
+}
+
+.cake-wrapper {
+  position: relative;
+  cursor: pointer;
+  animation: floatSlow 5s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.cake-wrapper:hover {
+  transform: scale(1.03);
+}
+
+/* -- Tooltip -- */
+.cake-tooltip {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  color: var(--deep-pink);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border-radius: 50px;
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: fadeInUp 0.4s ease;
+  z-index: 10;
+}
+
+.cake-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--white);
+}
+
+/* -- Cake Structure -- */
+.cake {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+}
+
+/* -- Candles Container -- */
+.candles-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: -4px;
+  position: relative;
+  z-index: 5;
+}
+
+.candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.candle-stick {
+  width: 8px;
+  height: 36px;
+  border-radius: 3px 3px 0 0;
+  position: relative;
+}
+
+.candle:nth-child(1) .candle-stick {
+  background: linear-gradient(180deg, #FFB3D1, #FF8AB5);
+}
+.candle:nth-child(2) .candle-stick {
+  background: linear-gradient(180deg, #C9B3FF, #A68AFF);
+}
+.candle:nth-child(3) .candle-stick {
+  background: linear-gradient(180deg, #FFD6A3, #FFBF70);
+}
+.candle:nth-child(4) .candle-stick {
+  background: linear-gradient(180deg, #A3D8FF, #70BFFF);
+}
+.candle:nth-child(5) .candle-stick {
+  background: linear-gradient(180deg, #FFB3D1, #FF8AB5);
+}
+
+.candle-stick::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 6px;
+  background: #555;
+  border-radius: 1px;
+}
+
+/* Stripe decoration on candle */
+.candle-stick::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+}
+
+/* -- Flame -- */
+.flame-container {
+  position: relative;
+  width: 16px;
+  height: 24px;
+  margin-bottom: 2px;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.flame-container.blown-out {
+  opacity: 0;
+  transform: scaleY(0) translateY(10px);
+}
+
+.flame {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 18px;
+  background: radial-gradient(ellipse at center bottom, #FFF9C4 10%, #FFE082 30%, #FFB74D 55%, #FF8A65 80%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flicker 0.4s ease-in-out infinite alternate;
+}
+
+.flame::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #42A5F5;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* Glow effect */
+.flame::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, rgba(255, 224, 130, 0.5) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Individual candle flame timing offsets */
+.candle:nth-child(1) .flame { animation-delay: 0s; }
+.candle:nth-child(2) .flame { animation-delay: 0.1s; }
+.candle:nth-child(3) .flame { animation-delay: 0.2s; }
+.candle:nth-child(4) .flame { animation-delay: 0.15s; }
+.candle:nth-child(5) .flame { animation-delay: 0.25s; }
+
+/* -- Smoke puff when blown out -- */
+.smoke {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: rgba(180, 180, 180, 0.4);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.smoke.visible {
+  animation: smokeRise 1.2s ease-out forwards;
+}
+
+@keyframes smokeRise {
+  0% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-30px) scale(2.5);
+  }
+}
+
+/* -- Cake Layers -- */
+.cake-top-layer {
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(180deg, #FFEEF5 0%, var(--pastel-pink) 100%);
+  border-radius: 16px 16px 4px 4px;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(255, 107, 157, 0.15);
+}
+
+/* Frosting on top */
+.cake-top-layer::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -4px;
+  right: -4px;
+  height: 14px;
+  background: var(--white);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 2px 6px rgba(255, 107, 157, 0.1);
+}
+
+/* Frosting drips - top layer */
+.frosting-drips-top {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 20px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.drip {
+  position: absolute;
+  background: var(--white);
+  border-radius: 0 0 50% 50%;
+  top: -2px;
+}
+
+.drip-1 { left: 15px; width: 10px; height: 14px; }
+.drip-2 { left: 45px; width: 12px; height: 20px; }
+.drip-3 { left: 80px; width: 8px; height: 12px; }
+.drip-4 { left: 120px; width: 14px; height: 18px; }
+.drip-5 { left: 155px; width: 10px; height: 15px; }
+.drip-6 { left: 180px; width: 8px; height: 10px; }
+
+.cake-middle-layer {
+  width: 230px;
+  height: 55px;
+  background: linear-gradient(180deg, var(--lavender) 0%, #D4C4F5 100%);
+  border-radius: 6px 6px 4px 4px;
+  position: relative;
+  z-index: 2;
+  margin-top: -2px;
+  box-shadow: 0 2px 8px rgba(196, 166, 255, 0.2);
+}
+
+/* Frosting drips - middle layer */
+.frosting-drips-mid {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 24px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.drip-m1 { left: 10px; width: 12px; height: 16px; }
+.drip-m2 { left: 50px; width: 10px; height: 22px; }
+.drip-m3 { left: 95px; width: 14px; height: 14px; }
+.drip-m4 { left: 140px; width: 8px; height: 20px; }
+.drip-m5 { left: 185px; width: 12px; height: 12px; }
+.drip-m6 { left: 210px; width: 10px; height: 18px; }
+
+/* Lavender-tinted drips for middle layer */
+.frosting-drips-mid .drip {
+  background: linear-gradient(180deg, #EDE4FF, #DDD0FF);
+}
+
+.cake-bottom-layer {
+  width: 260px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--cream) 0%, #FFE8C8 100%);
+  border-radius: 6px 6px 16px 16px;
+  position: relative;
+  z-index: 1;
+  margin-top: -2px;
+  box-shadow: 0 4px 12px rgba(255, 200, 150, 0.25);
+}
+
+/* -- Decorations -- */
+.sprinkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.sprinkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+/* Top layer sprinkles */
+.cake-top-layer .sprinkle:nth-child(1) { background: #FF8AB5; top: 15px; left: 20px; }
+.cake-top-layer .sprinkle:nth-child(2) { background: #A68AFF; top: 25px; left: 50px; width: 4px; height: 4px; }
+.cake-top-layer .sprinkle:nth-child(3) { background: #70BFFF; top: 18px; left: 90px; }
+.cake-top-layer .sprinkle:nth-child(4) { background: #FFD700; top: 30px; left: 130px; width: 4px; height: 4px; }
+.cake-top-layer .sprinkle:nth-child(5) { background: #FF8AB5; top: 20px; left: 165px; }
+
+/* Middle layer sprinkles */
+.cake-middle-layer .sprinkle:nth-child(1) { background: #FFB3D1; top: 12px; left: 25px; }
+.cake-middle-layer .sprinkle:nth-child(2) { background: #FFD700; top: 28px; left: 65px; width: 4px; height: 4px; }
+.cake-middle-layer .sprinkle:nth-child(3) { background: #FF8AB5; top: 18px; left: 110px; }
+.cake-middle-layer .sprinkle:nth-child(4) { background: #70BFFF; top: 35px; left: 155px; width: 4px; height: 4px; }
+.cake-middle-layer .sprinkle:nth-child(5) { background: #A68AFF; top: 15px; left: 195px; }
+
+/* Bottom layer sprinkles */
+.cake-bottom-layer .sprinkle:nth-child(1) { background: #FF8AB5; top: 14px; left: 30px; }
+.cake-bottom-layer .sprinkle:nth-child(2) { background: #A68AFF; top: 30px; left: 70px; width: 4px; height: 4px; }
+.cake-bottom-layer .sprinkle:nth-child(3) { background: #FFD700; top: 20px; left: 125px; }
+.cake-bottom-layer .sprinkle:nth-child(4) { background: #70BFFF; top: 38px; left: 180px; width: 4px; height: 4px; }
+.cake-bottom-layer .sprinkle:nth-child(5) { background: #FFB3D1; top: 16px; left: 220px; }
+
+/* Cherry on top */
+.cherry {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+}
+
+.cherry-fruit {
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 35% 35%, #FF6B8A, #E8365D);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset -2px -2px 4px rgba(0,0,0,0.15), 0 2px 6px rgba(232, 54, 93, 0.3);
+}
+
+/* Cherry shine */
+.cherry-fruit::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 5px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+/* Cherry stem */
+.cherry-fruit::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 12px;
+  background: #4CAF50;
+  border-radius: 2px;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(10deg);
+}
+
+/* -- Cake Plate -- */
+.cake-plate {
+  width: 290px;
+  height: 16px;
+  background: linear-gradient(180deg, #F5F0FF, #E8E0F0);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  margin-top: -2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 0;
+}
+
+.cake-plate::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -5px;
+  right: -5px;
+  height: 6px;
+  background: linear-gradient(180deg, #FAFAFA, #EDEDED);
+  border-radius: 50%;
+}
+
+/* -- Buttons -- */
+.cake-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.relight-btn {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 24px;
+  border: 2px solid var(--pastel-pink);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--deep-pink);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease;
+}
+
+.relight-btn:hover {
+  background: var(--pastel-pink);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* -- Sparkle Burst -- */
+.sparkle-burst {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 200px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.sparkle-particle {
+  position: absolute;
+  font-size: 1rem;
+  animation: sparkleBurst 1.2s ease-out forwards;
+}
+
+.sparkle-particle:nth-child(1) { top: 30%; left: 10%; animation-delay: 0s; }
+.sparkle-particle:nth-child(2) { top: 10%; left: 30%; animation-delay: 0.1s; }
+.sparkle-particle:nth-child(3) { top: 20%; left: 50%; animation-delay: 0.05s; }
+.sparkle-particle:nth-child(4) { top: 15%; left: 70%; animation-delay: 0.15s; }
+.sparkle-particle:nth-child(5) { top: 35%; left: 85%; animation-delay: 0.08s; }
+.sparkle-particle:nth-child(6) { top: 40%; left: 20%; animation-delay: 0.12s; }
+.sparkle-particle:nth-child(7) { top: 5%; left: 55%; animation-delay: 0.18s; }
+.sparkle-particle:nth-child(8) { top: 25%; left: 40%; animation-delay: 0.06s; }
+
+@keyframes sparkleBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.3) translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-50px);
+  }
+}
+
+/* -- Wish Overlay -- */
+.wish-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(90, 74, 106, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease;
+  padding: 20px;
+}
+
+.wish-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient border effect */
+.wish-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--deep-pink), var(--soft-purple), var(--deep-pink));
+  background-size: 200% 100%;
+  animation: gradientBG 3s ease infinite;
+}
+
+.wish-card-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+.wish-card-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--deep-pink);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.wish-card-message {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-medium);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.wish-card-close {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--deep-pink), var(--soft-purple));
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.35);
+}
+
+.wish-card-close:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 25px rgba(255, 107, 157, 0.5);
+}
+
+.wish-card-close:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* -- Floating decorative sparkles around cake -- */
+.cake-deco {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.4;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.cake-deco-1 { top: -10px; left: -30px; font-size: 0.8rem; animation-delay: 0s; }
+.cake-deco-2 { top: 30px; right: -25px; font-size: 0.7rem; animation-delay: 1s; }
+.cake-deco-3 { bottom: 20px; left: -20px; font-size: 0.6rem; animation-delay: 2s; }
+.cake-deco-4 { bottom: 0; right: -30px; font-size: 0.75rem; animation-delay: 0.5s; }
+
+/* -- Responsive -- */
+@media (max-width: 480px) {
+  .cake {
+    width: 210px;
+    transform: scale(0.88);
+  }
+
+  .cake-top-layer { width: 160px; height: 40px; }
+  .cake-middle-layer { width: 186px; height: 45px; }
+  .cake-bottom-layer { width: 210px; height: 50px; }
+  .cake-plate { width: 234px; }
+
+  .candles-row {
+    gap: 20px;
+  }
+
+  .candle-stick {
+    height: 28px;
+  }
+
+  .flame-container {
+    width: 14px;
+    height: 20px;
+  }
+
+  .flame {
+    width: 8px;
+    height: 14px;
+  }
+
+  .wish-card {
+    padding: 28px 24px;
+  }
+
+  .wish-card-emoji {
+    font-size: 2.8rem;
+  }
+
+  .wish-card-title {
+    font-size: 1.1rem;
+  }
+
+  .drip-1 { left: 10px; width: 8px; height: 12px; }
+  .drip-2 { left: 35px; width: 10px; height: 16px; }
+  .drip-3 { left: 60px; width: 6px; height: 10px; }
+  .drip-4 { left: 95px; width: 12px; height: 14px; }
+  .drip-5 { left: 125px; width: 8px; height: 12px; }
+  .drip-6 { left: 145px; width: 6px; height: 8px; }
+}

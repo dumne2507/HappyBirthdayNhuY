@@ -1,0 +1,520 @@
+/* ============================================
+   🎁 BirthdayIntro - Opening Splash Screen
+   ============================================ */
+
+/* --- Container --- */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro.intro--exiting {
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+/* --- Animated gradient background --- */
+.intro__bg {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    var(--pastel-pink),
+    var(--lavender),
+    var(--baby-blue),
+    var(--cream),
+    var(--pastel-pink),
+    var(--lavender)
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 8s ease infinite;
+  z-index: 0;
+}
+
+/* --- Content wrapper --- */
+.intro__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* --- Heading --- */
+.intro__title {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  text-shadow: 0 2px 15px rgba(255, 107, 157, 0.3);
+  animation: bounce 2s ease-in-out infinite;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+/* --- Subtext --- */
+.intro__subtext {
+  font-family: var(--font-accent);
+  font-size: 1.3rem;
+  color: var(--text-medium);
+  animation: fadeIn 1.5s ease 0.5s both;
+  text-align: center;
+}
+
+/* ============================================
+   🎁 Gift Box
+   ============================================ */
+.intro__gift-area {
+  position: relative;
+  margin: 28px 0 24px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* --- Box body --- */
+.gift-box {
+  position: relative;
+  width: 160px;
+  height: 120px;
+  background: linear-gradient(145deg, #ffb6d3, #ff8ec0);
+  border-radius: 8px 8px 12px 12px;
+  box-shadow:
+    0 8px 30px rgba(255, 107, 157, 0.35),
+    inset 0 -8px 20px rgba(200, 50, 100, 0.15),
+    inset 0 2px 8px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.gift-box::before,
+.gift-box::after {
+  content: '';
+  position: absolute;
+}
+
+/* Vertical ribbon */
+.gift-box::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 22px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #e6a0ff, #c480ef);
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+/* Horizontal ribbon */
+.gift-box::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 22px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #e6a0ff, #c480ef);
+  border-radius: 2px;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Ribbon center knot --- */
+.gift-box__knot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, #d18cff, #b060e0);
+  border-radius: 50%;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(150, 60, 200, 0.3);
+}
+
+/* --- Gift box lid --- */
+.gift-box__lid {
+  position: absolute;
+  top: -20px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: 28px;
+  background: linear-gradient(145deg, #ffc4dd, #ff96c6);
+  border-radius: 8px 8px 4px 4px;
+  box-shadow:
+    0 -2px 10px rgba(255, 107, 157, 0.2),
+    inset 0 2px 6px rgba(255, 255, 255, 0.4);
+  z-index: 6;
+  transform-origin: left bottom;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Lid ribbon stripe */
+.gift-box__lid::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 22px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #e6a0ff, #c480ef);
+  border-radius: 2px;
+}
+
+/* --- Bow --- */
+.gift-box__bow {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  width: 80px;
+  height: 40px;
+}
+
+/* Bow loops */
+.gift-box__bow::before,
+.gift-box__bow::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  width: 36px;
+  height: 28px;
+  border-radius: 50% 50% 50% 50%;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.gift-box__bow::before {
+  left: 0;
+  background: linear-gradient(145deg, #e6a0ff, #d080f0);
+  transform: rotate(-20deg);
+}
+
+.gift-box__bow::after {
+  right: 0;
+  background: linear-gradient(145deg, #d080f0, #c060e0);
+  transform: rotate(20deg);
+}
+
+/* Bow center */
+.gift-box__bow-center {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #d18cff, #b060e0);
+  border-radius: 50%;
+  z-index: 8;
+  box-shadow: 0 2px 6px rgba(150, 60, 200, 0.3);
+}
+
+/* Bow tails */
+.gift-box__bow-tail {
+  position: absolute;
+  top: 28px;
+  width: 14px;
+  height: 24px;
+  z-index: 6;
+}
+
+.gift-box__bow-tail--left {
+  left: 8px;
+  background: linear-gradient(180deg, #d080f0, #c060e0);
+  transform: rotate(15deg) skewX(-5deg);
+  border-radius: 0 0 6px 6px;
+}
+
+.gift-box__bow-tail--right {
+  right: 8px;
+  background: linear-gradient(180deg, #c060e0, #b050d0);
+  transform: rotate(-15deg) skewX(5deg);
+  border-radius: 0 0 6px 6px;
+}
+
+/* --- Decorative dots on box --- */
+.gift-box__dots {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.gift-box__dots::before {
+  content: '• • • • • • • • • • • • • • • • • • • •';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 6px;
+  line-height: 22px;
+  padding: 8px;
+}
+
+/* --- Opened state --- */
+.intro__gift-area.gift--opened .gift-box__lid {
+  transform: rotate(-110deg) translateY(-10px);
+}
+
+.intro__gift-area.gift--opened .gift-box__bow {
+  animation: flyUp 0.6s ease-out forwards;
+}
+
+/* --- Emoji burst --- */
+.intro__emoji-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.intro__emoji-burst span {
+  position: absolute;
+  font-size: 2rem;
+  animation: emojiBurst 1.4s ease-out forwards;
+}
+
+@keyframes emojiBurst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--rot));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx-end), var(--ty-end)) scale(0.6) rotate(var(--rot-end));
+  }
+}
+
+/* ============================================
+   🎀 Button
+   ============================================ */
+.intro__button {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--deep-pink), var(--soft-purple));
+  color: white;
+  cursor: pointer;
+  box-shadow:
+    0 4px 20px rgba(255, 107, 157, 0.4),
+    0 0 0 0 rgba(255, 107, 157, 0);
+  animation: fadeInUp 1s ease 1s both, buttonGlow 2s ease-in-out infinite 2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 0.5px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro__button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 3s ease-in-out infinite 2s;
+}
+
+.intro__button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 8px 30px rgba(255, 107, 157, 0.5),
+    0 0 20px rgba(196, 166, 255, 0.3);
+}
+
+.intro__button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.intro__button:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+  animation: fadeInUp 1s ease 1s both;
+}
+
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow:
+      0 4px 20px rgba(255, 107, 157, 0.4),
+      0 0 0 0 rgba(255, 107, 157, 0);
+  }
+  50% {
+    box-shadow:
+      0 4px 20px rgba(255, 107, 157, 0.4),
+      0 0 0 12px rgba(255, 107, 157, 0);
+  }
+}
+
+/* ============================================
+   ✨ Floating Decorative Emojis
+   ============================================ */
+.intro__deco {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  font-size: 1.6rem;
+  opacity: 0;
+  animation: decoFloat var(--dur) var(--ease, ease-in-out) var(--delay) infinite both;
+}
+
+@keyframes decoFloat {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+  }
+  15% {
+    opacity: var(--peak-opacity, 0.6);
+  }
+  50% {
+    transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--spin, 30deg));
+  }
+  85% {
+    opacity: var(--peak-opacity, 0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+  }
+}
+
+/* ============================================
+   ✨ Sparkle Stars
+   ============================================ */
+.intro__sparkle {
+  position: absolute;
+  z-index: 1;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle var(--dur, 2s) ease-in-out var(--delay, 0s) infinite;
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   📱 Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .intro__title {
+    font-size: 2.2rem;
+  }
+
+  .intro__subtext {
+    font-size: 1.05rem;
+  }
+
+  .gift-box {
+    width: 130px;
+    height: 100px;
+  }
+
+  .gift-box::before,
+  .gift-box::after {
+    width: 18px;
+    height: 18px;
+  }
+  .gift-box::before {
+    width: 18px;
+  }
+  .gift-box::after {
+    height: 18px;
+  }
+
+  .gift-box__lid {
+    height: 24px;
+    top: -18px;
+  }
+
+  .gift-box__bow {
+    top: -44px;
+    width: 66px;
+    height: 34px;
+  }
+
+  .gift-box__bow::before,
+  .gift-box__bow::after {
+    width: 30px;
+    height: 24px;
+  }
+
+  .gift-box__bow-center {
+    width: 15px;
+    height: 15px;
+    top: 16px;
+  }
+
+  .gift-box__knot {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intro__button {
+    font-size: 1rem;
+    padding: 14px 28px;
+  }
+
+  .intro__gift-area {
+    margin: 20px 0 18px;
+  }
+
+  .intro__emoji-burst span {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .intro__title {
+    font-size: 1.8rem;
+  }
+
+  .intro__subtext {
+    font-size: 0.95rem;
+  }
+
+  .gift-box {
+    width: 110px;
+    height: 85px;
+  }
+
+  .intro__button {
+    font-size: 0.9rem;
+    padding: 12px 24px;
+  }
+}

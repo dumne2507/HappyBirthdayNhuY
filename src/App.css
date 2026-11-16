@@ -1,0 +1,146 @@
+/* ============================================
+   🎂 Main Application Styles
+   ============================================ */
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #FFD6E7 0%, #E6D9FF 50%, #D8F0FF 100%);
+  background-attachment: fixed;
+}
+
+/* Background floating decorative elements */
+.bg-doodles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-doodle {
+  position: absolute;
+  opacity: 0.25;
+  font-size: 1.8rem;
+  animation: floatSlow 8s ease-in-out infinite;
+  user-select: none;
+}
+
+/* Main birthday page content */
+.main-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 16px 60px;
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hero Header Section */
+.hero-header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  margin-bottom: 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-family: var(--font-accent);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 16px;
+  animation: bounce 2.5s infinite;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-shadow: 2px 4px 15px rgba(255, 107, 157, 0.25);
+}
+
+.hero-wish {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #7B5C9E;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.hero-message {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  line-height: 1.8;
+  max-width: 650px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  padding: 18px 28px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* Quick Navigation / Replay intro button */
+.top-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.replay-intro-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--pastel-pink);
+  color: var(--deep-pink);
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+.replay-intro-btn:hover {
+  background: var(--pastel-pink);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-wish {
+    font-size: 1.2rem;
+  }
+
+  .hero-message {
+    font-size: 0.95rem;
+    padding: 16px 20px;
+  }
+
+  .main-content {
+    padding: 24px 12px 40px;
+  }
+}

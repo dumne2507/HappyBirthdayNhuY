@@ -1,0 +1,451 @@
+/* ============================================
+   🎈 Floating Balloons - Interactive Wishes
+   ============================================ */
+
+.balloons-section {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.balloons-section .section-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--deep-pink);
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.balloons-subtitle {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-medium);
+  margin-top: -28px;
+  margin-bottom: 36px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+/* ---- Balloon Grid ---- */
+.balloons-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 36px;
+  flex-wrap: wrap;
+  min-height: 320px;
+  padding: 20px 10px 40px;
+  position: relative;
+}
+
+/* ---- Individual Balloon Wrapper ---- */
+.balloon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  position: relative;
+  /* stagger the vertical position for a natural look */
+}
+
+.balloon-wrapper:nth-child(odd) {
+  margin-top: 0;
+}
+
+.balloon-wrapper:nth-child(even) {
+  margin-top: 30px;
+}
+
+.balloon-wrapper:hover {
+  filter: brightness(1.08);
+}
+
+.balloon-wrapper:hover .balloon-body {
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* ---- Balloon Sway Animation ---- */
+@keyframes balloonsway1 {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  33% { transform: translateY(-12px) rotate(2deg); }
+  66% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes balloonsway2 {
+  0%, 100% { transform: translateY(-4px) rotate(2deg); }
+  33% { transform: translateY(-16px) rotate(-3deg); }
+  66% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes balloonsway3 {
+  0%, 100% { transform: translateY(-2px) rotate(1deg); }
+  50% { transform: translateY(-14px) rotate(-2deg); }
+}
+
+.balloon-float {
+  animation: balloonsway1 4s ease-in-out infinite;
+}
+
+.balloon-float-delay1 {
+  animation: balloonsway2 4.5s ease-in-out 0.3s infinite;
+}
+
+.balloon-float-delay2 {
+  animation: balloonsway3 5s ease-in-out 0.6s infinite;
+}
+
+.balloon-float-delay3 {
+  animation: balloonsway1 4.2s ease-in-out 0.9s infinite;
+}
+
+.balloon-float-delay4 {
+  animation: balloonsway2 4.8s ease-in-out 1.2s infinite;
+}
+
+.balloon-float-delay5 {
+  animation: balloonsway3 5.2s ease-in-out 0.4s infinite;
+}
+
+/* ---- Balloon Body (oval shape) ---- */
+.balloon-body {
+  width: 80px;
+  height: 100px;
+  border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+  position: relative;
+  box-shadow:
+    inset -8px -8px 20px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+/* Shine / highlight overlay for 3D effect */
+.balloon-body::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 40px;
+  top: 14px;
+  left: 14px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Secondary smaller shine */
+.balloon-body::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 20px;
+  left: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* ---- Knot (small triangle at the bottom) ---- */
+.balloon-knot {
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  margin-top: -2px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Balloon-specific knot colors */
+.balloon-color-0 .balloon-knot { background: #ffb8d4; }
+.balloon-color-1 .balloon-knot { background: #ccbae6; }
+.balloon-color-2 .balloon-knot { background: #aed8f0; }
+.balloon-color-3 .balloon-knot { background: #f0dfc0; }
+.balloon-color-4 .balloon-knot { background: #aa8edf; }
+.balloon-color-5 .balloon-knot { background: #f0a8a8; }
+
+/* ---- String ---- */
+.balloon-string {
+  width: 2px;
+  height: 80px;
+  position: relative;
+  overflow: visible;
+}
+
+.balloon-string::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 80px;
+  border: none;
+  border-left: 1.5px solid rgba(180, 160, 180, 0.5);
+  border-radius: 0 0 0 50%;
+}
+
+/* ---- Balloon Colors ---- */
+.balloon-color-0 .balloon-body {
+  background: linear-gradient(145deg, #FFD6E7 0%, #ffbdd8 60%, #ffa8c8 100%);
+}
+
+.balloon-color-1 .balloon-body {
+  background: linear-gradient(145deg, #E6D9FF 0%, #d4c4f7 60%, #c4b0f0 100%);
+}
+
+.balloon-color-2 .balloon-body {
+  background: linear-gradient(145deg, #D8F0FF 0%, #bbe4ff 60%, #a0d8ff 100%);
+}
+
+.balloon-color-3 .balloon-body {
+  background: linear-gradient(145deg, #FFF6E8 0%, #ffe8c8 60%, #ffdcb0 100%);
+}
+
+.balloon-color-4 .balloon-body {
+  background: linear-gradient(145deg, #d8c0ff 0%, #C4A6FF 60%, #b090f0 100%);
+}
+
+.balloon-color-5 .balloon-body {
+  background: linear-gradient(145deg, #FFD0D0 0%, #ffb8b8 60%, #ffa0a0 100%);
+}
+
+/* ---- Fly Away Animation ---- */
+@keyframes balloonFlyAway {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  30% {
+    opacity: 0.9;
+    transform: translateY(-80px) scale(0.9) rotate(5deg);
+  }
+  60% {
+    opacity: 0.5;
+    transform: translateY(-220px) scale(0.6) rotate(-8deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-450px) scale(0.2) rotate(12deg);
+  }
+}
+
+.balloon-flying {
+  animation: balloonFlyAway 1.6s ease-in forwards;
+  pointer-events: none;
+}
+
+/* ---- Wish Toast ---- */
+@keyframes toastFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toastFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.9);
+  }
+}
+
+.wish-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--pastel-pink);
+  border-radius: var(--radius-lg);
+  padding: 20px 36px;
+  box-shadow:
+    0 10px 40px rgba(255, 107, 157, 0.2),
+    0 0 0 4px rgba(255, 214, 231, 0.3);
+  z-index: 100;
+  text-align: center;
+  pointer-events: none;
+  animation: toastFadeIn 0.4s ease forwards;
+}
+
+.wish-toast.fading-out {
+  animation: toastFadeOut 0.5s ease forwards;
+}
+
+.wish-toast-emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 8px;
+  animation: bounce 0.6s ease;
+}
+
+.wish-toast-text {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* ---- Reset Button ---- */
+.balloons-reset-wrapper {
+  text-align: center;
+  margin-top: 30px;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.balloons-reset-btn {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--deep-pink), var(--soft-purple));
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.balloons-reset-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 25px rgba(255, 107, 157, 0.5);
+}
+
+.balloons-reset-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ---- All-done message ---- */
+.balloons-done-msg {
+  text-align: center;
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-medium);
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+/* ---- Empty state (all flown away) ---- */
+.balloons-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 16px;
+}
+
+.balloons-empty-emoji {
+  font-size: 3rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .balloons-section {
+    padding: 40px 16px;
+  }
+
+  .balloons-section .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 28px;
+  }
+
+  .balloons-subtitle {
+    font-size: 0.9rem;
+    margin-top: -18px;
+    margin-bottom: 28px;
+  }
+
+  .balloons-container {
+    gap: 20px;
+    min-height: 240px;
+    padding: 10px 5px 30px;
+  }
+
+  .balloon-body {
+    width: 60px;
+    height: 76px;
+  }
+
+  .balloon-body::before {
+    width: 22px;
+    height: 30px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .balloon-body::after {
+    width: 7px;
+    height: 7px;
+    top: 15px;
+    left: 16px;
+  }
+
+  .balloon-knot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .balloon-string {
+    height: 55px;
+  }
+
+  .balloon-string::before {
+    width: 30px;
+    height: 55px;
+  }
+
+  .balloon-wrapper:nth-child(even) {
+    margin-top: 16px;
+  }
+
+  .wish-toast {
+    padding: 16px 24px;
+    width: 85%;
+    max-width: 300px;
+  }
+
+  .wish-toast-text {
+    font-size: 1rem;
+  }
+
+  .wish-toast-emoji {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .balloons-container {
+    gap: 14px;
+  }
+
+  .balloon-body {
+    width: 52px;
+    height: 66px;
+  }
+}
